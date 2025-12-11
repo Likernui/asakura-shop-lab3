@@ -255,3 +255,11 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
   font-size: 0.95rem;
 }
+/* Мелкая оптимизация: улучшены отступы карточек */
+.main__card {
+    transition: transform .15s ease-in-out;
+}
+
+.main__card:hover {
+    transform: translateY(-3px);
+}
