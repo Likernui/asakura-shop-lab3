@@ -6,10 +6,27 @@ use App\Models\Figure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
+
 class FigureController extends Controller
 {
+    /**
+ * Контроллер для работы с фигурками.
+ *
+ * Здесь реализованы:
+ * - вывод списка фигурок;
+ * - создание новой фигурки;
+ * - редактирование существующей;
+ * - удаление;
+ * - просмотр деталей.
+ */
+
     public function index()
     {
+    /**
+     * Показать список всех фигурок.
+     */
+
         $figures = Figure::orderBy('id')->get();
 
         return view('figures.index', compact('figures'));
@@ -22,6 +39,12 @@ class FigureController extends Controller
 
     public function store(Request $request)
     {
+    /**
+     * Сохранить новую фигурку в базу данных.
+     *
+     * Здесь выполняется валидация формы и загрузка изображения.
+     */
+
         // Картинка ОБЯЗАТЕЛЬНА
         $validated = $request->validate(
             [
@@ -60,11 +83,22 @@ class FigureController extends Controller
 
     public function edit(Figure $figure)
     {
+    /**
+     * Показать форму редактирования существующей фигурки.
+     */
+
         return view('figures.edit', compact('figure'));
     }
 
     public function update(Request $request, Figure $figure)
     {
+    /**
+     * Обновить данные фигурки в базе.
+     *
+     * При необходимости можно заменить изображение:
+     * старое удаляется из storage, новое сохраняется.
+     */
+
         $validated = $request->validate(
             [
                 'name'              => 'required|string|max:255',
@@ -107,6 +141,10 @@ class FigureController extends Controller
 
     public function destroy(Figure $figure)
     {
+    /**
+     * Удалить фигурку и её изображение (если оно было загружено).
+     */
+
         if ($figure->image) {
             Storage::disk('public')->delete($figure->image);
         }
