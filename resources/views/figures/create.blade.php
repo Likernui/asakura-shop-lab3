@@ -16,6 +16,7 @@
                    name="name"
                    value="{{ old('name') }}"
                    class="form-control @error('name') is-invalid @enderror">
+            <div class="form-text">Введите полное название фигурки.</div>
             @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -63,6 +64,10 @@
             <textarea name="short_description"
                       rows="2"
                       class="form-control @error('short_description') is-invalid @enderror">{{ old('short_description') }}</textarea>
+            <div class="form-text">
+                Это описание показывается на карточке товара.
+            </div>
+
             @error('short_description')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -86,6 +91,7 @@
                    name="release_date"
                    value="{{ old('release_date') }}"
                    class="form-control @error('release_date') is-invalid @enderror">
+            <div class="form-text">Укажите дату, когда фигурка поступила в продажу.</div>
             @error('release_date')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
